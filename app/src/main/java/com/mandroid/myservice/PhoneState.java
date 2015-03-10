@@ -4,13 +4,15 @@ import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.telephony.TelephonyManager;
 import android.widget.Toast;
 
-/**
- * Created by Chamran on 3/10/2015.
- */
 public class PhoneState extends BroadcastReceiver{
+
+    String IS_CALLED_SERVICE = "Service";
+
+
     @Override
     public void onReceive(Context context, Intent intent) {
 
@@ -19,8 +21,14 @@ public class PhoneState extends BroadcastReceiver{
         switch (tm.getCallState()) {
 
             case TelephonyManager.CALL_STATE_RINGING:
+                WaitForCall call = new WaitForCall();
                 String phoneNr= intent.getStringExtra("incoming_number");
                 Toast.makeText(context, phoneNr, Toast.LENGTH_LONG).show();
+                //call.NavigateBack();
+               // call.navigation = true;
+                SharedPreferences.Editor editor = context.getSharedPreferences(IS_CALLED_SERVICE, context.MODE_PRIVATE).edit();
+                editor.putBoolean("iscalled", false);
+                editor.commit();
                 break;
         }
     }

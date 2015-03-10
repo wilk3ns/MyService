@@ -3,6 +3,8 @@ package com.mandroid.myservice;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -24,6 +26,7 @@ public class MainActivity extends ActionBarActivity {
 
     ParseUser currentUser;
     ParseObject calls;
+    String IS_CALLED_SERVICE = "Service";
 
 
     @Override
@@ -55,6 +58,11 @@ public class MainActivity extends ActionBarActivity {
             public void done(ParseException e) {
                 if (e==null){
                     Toast.makeText(MainActivity.this,"Driver Called",Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(MainActivity.this,WaitForCall.class));
+                    SharedPreferences.Editor editor = getSharedPreferences(IS_CALLED_SERVICE, MODE_PRIVATE).edit();
+                    editor.putBoolean("iscalled", true);
+                    editor.commit();
+                    finish();
                 }
                 else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
@@ -82,6 +90,12 @@ public class MainActivity extends ActionBarActivity {
             public void done(ParseException e) {
                 if (e==null){
                     Toast.makeText(MainActivity.this,"Taxi Called",Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(MainActivity.this,WaitForCall.class));
+                    startActivity(new Intent(MainActivity.this,WaitForCall.class));
+                    SharedPreferences.Editor editor = getSharedPreferences(IS_CALLED_SERVICE, MODE_PRIVATE).edit();
+                    editor.putBoolean("iscalled", true);
+                    editor.commit();
+                    finish();
                 }
                 else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
@@ -109,7 +123,14 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void done(ParseException e) {
                 if (e==null){
+
                     Toast.makeText(MainActivity.this,"Car Wash service called",Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(MainActivity.this,WaitForCall.class));
+                    startActivity(new Intent(MainActivity.this,WaitForCall.class));
+                    SharedPreferences.Editor editor = getSharedPreferences(IS_CALLED_SERVICE, MODE_PRIVATE).edit();
+                    editor.putBoolean("iscalled", true);
+                    editor.commit();
+                    finish();
                 }
                 else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
@@ -137,6 +158,12 @@ public class MainActivity extends ActionBarActivity {
             public void done(ParseException e) {
                 if (e==null){
                     Toast.makeText(MainActivity.this,"RentServiceCalled",Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(MainActivity.this,WaitForCall.class));
+                    startActivity(new Intent(MainActivity.this,WaitForCall.class));
+                    SharedPreferences.Editor editor = getSharedPreferences(IS_CALLED_SERVICE, MODE_PRIVATE).edit();
+                    editor.putBoolean("iscalled", true);
+                    editor.commit();
+                    finish();
                 }
                 else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);

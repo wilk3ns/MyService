@@ -2,6 +2,7 @@ package com.mandroid.myservice;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 
@@ -12,9 +13,10 @@ import com.parse.ParseUser;
 
 public class StartupCheckerActivity extends Activity {
 
-    @Override
+    SharedPreferences prefs;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        prefs = getSharedPreferences("Service", MODE_PRIVATE);
         isInternetOn();
 
         // Determine whether the current user is an anonymous user
@@ -51,13 +53,17 @@ public class StartupCheckerActivity extends Activity {
 
     public void ifConnected(){
 
+        if (prefs.getBoolean("iscalled",false)==true){
+            startActivity(new Intent(this,WaitForCall.class));
+            finish();
+            return;
+        }
 
         if (ParseAnonymousUtils.isLinked(ParseUser.getCurrentUser())) {
             // If user is anonymous, send the user to LoginSignupActivity.class
             Intent intent = new Intent(StartupCheckerActivity.this,
                     LoginActivity.class);
             startActivity(intent);
-            finish();
         } else {
             // If current user is NOT anonymous user
             // Get current user data from Parse.com
@@ -72,9 +78,9 @@ public class StartupCheckerActivity extends Activity {
                 Intent intent = new Intent(StartupCheckerActivity.this,
                         LoginActivity.class);
                 startActivity(intent);
-                finish();
             }
         }
+        finish();
 
     }
     public void ifNotConnected(){

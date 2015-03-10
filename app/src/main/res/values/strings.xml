@@ -17,4 +17,6 @@
     <string name="washSentence">Zəhmət olmasa maşın yuma xidməti ilə əlaqələndirim Hörmətlə: </string>
     <string name="rentSentence">Zəhmət olmasa mənim üçün maşın kiralayın Hörmətlə: </string>
     <string name="driverSentence">Zəhmət olmasa mənə ayıq sürücü göndərin Hörmətlə: </string>
+    <string name="title_activity_wait_for_call">WaitForCall</string>
+    <string name="callRecievedText">You've Recieved a call!</string>
 </resources>
