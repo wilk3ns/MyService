@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">*5533</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_register">RegisterActivity</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_startup_checker">StartupCheckerActivity</string>
+    <string name="Logout">Log out</string>
+    <string name="DriverCall">Call Driver</string>
+    <string name="callTaxi">Call Taxi</string>
+    <string name="carWash">Car Wash</string>
+    <string name="rentaCar">Rent a car</string>
+    <string name="title_activity_offline_main">OfflineMainActivity</string>
+    <string name="goOnline">Go Online</string>
+    <string name="taxiSentence">Zəhmət olmasa mənə taksi göndərin Hörmətlə: </string>
+    <string name="washSentence">Zəhmət olmasa maşın yuma xidməti ilə əlaqələndirim Hörmətlə: </string>
+    <string name="rentSentence">Zəhmət olmasa mənim üçün maşın kiralayın Hörmətlə: </string>
+    <string name="driverSentence">Zəhmət olmasa mənə ayıq sürücü göndərin Hörmətlə: </string>
+</resources>
