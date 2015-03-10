@@ -3,6 +3,7 @@ package com.mandroid.myservice;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -42,6 +43,10 @@ public class OfflineMainActivity extends ActionBarActivity {
             public void onClick(DialogInterface dialog, int which) {
                 sendSMS("+994555801188", getResources().getString(R.string.driverSentence) + userName.toString());
                 dialog.dismiss();
+                SharedPreferences.Editor editor = getSharedPreferences("Service", MODE_PRIVATE).edit();
+                editor.putBoolean("iscalled", true);
+                editor.commit();
+                startActivity(new Intent(OfflineMainActivity.this,WaitForCall.class));
             }
         });
         builder.setNegativeButton("Cancel",new DialogInterface.OnClickListener(){
@@ -63,6 +68,10 @@ public class OfflineMainActivity extends ActionBarActivity {
             public void onClick(DialogInterface dialog, int which) {
                 sendSMS("+994555801188", getResources().getString(R.string.taxiSentence) + userName.toString());
                 dialog.dismiss();
+                SharedPreferences.Editor editor = getSharedPreferences("Service", MODE_PRIVATE).edit();
+                editor.putBoolean("iscalled", true);
+                editor.commit();
+                startActivity(new Intent(OfflineMainActivity.this,WaitForCall.class));
             }
         });
         builder.setNegativeButton("Cancel",new DialogInterface.OnClickListener(){
@@ -84,6 +93,10 @@ public class OfflineMainActivity extends ActionBarActivity {
             public void onClick(DialogInterface dialog, int which) {
                 sendSMS("+994555801188", getResources().getString(R.string.washSentence) + userName.toString());
                 dialog.dismiss();
+                SharedPreferences.Editor editor = getSharedPreferences("Service", MODE_PRIVATE).edit();
+                editor.putBoolean("iscalled", true);
+                editor.commit();
+                startActivity(new Intent(OfflineMainActivity.this,WaitForCall.class));
             }
         });
         builder.setNegativeButton("Cancel",new DialogInterface.OnClickListener(){
@@ -105,6 +118,10 @@ public class OfflineMainActivity extends ActionBarActivity {
             public void onClick(DialogInterface dialog, int which) {
                 sendSMS("+994555801188", getResources().getString(R.string.rentSentence) + userName.toString());
                 dialog.dismiss();
+                SharedPreferences.Editor editor = getSharedPreferences("Service", MODE_PRIVATE).edit();
+                editor.putBoolean("iscalled", true);
+                editor.commit();
+                startActivity(new Intent(OfflineMainActivity.this,WaitForCall.class));
             }
         });
         builder.setNegativeButton("Cancel",new DialogInterface.OnClickListener(){

@@ -84,12 +84,16 @@ public class StartupCheckerActivity extends Activity {
 
     }
     public void ifNotConnected(){
+        if (prefs.getBoolean("iscalled",false)==true){
+            startActivity(new Intent(this,WaitForCall.class));
+            finish();
+            return;
+        }
         if (ParseAnonymousUtils.isLinked(ParseUser.getCurrentUser())) {
             // If user is anonymous, send the user to LoginSignupActivity.class
             Intent intent = new Intent(StartupCheckerActivity.this,
                     LoginActivity.class);
             startActivity(intent);
-            finish();
         } else {
             // If current user is NOT anonymous user
             // Get current user data from Parse.com
@@ -98,15 +102,14 @@ public class StartupCheckerActivity extends Activity {
                 // Send logged in users to Welcome.class
                 Intent intent = new Intent(StartupCheckerActivity.this, OfflineMainActivity.class);
                 startActivity(intent);
-                finish();
             } else {
                 // Send user to LoginSignupActivity.class
                 Intent intent = new Intent(StartupCheckerActivity.this,
                         LoginActivity.class);
                 startActivity(intent);
-                finish();
             }
         }
+        finish();
 
     }
 }
