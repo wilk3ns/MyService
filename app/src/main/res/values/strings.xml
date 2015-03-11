@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">*5533</string>
 
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_register">RegisterActivity</string>
     <string name="title_activity_login">LoginActivity</string>
@@ -13,11 +12,12 @@
     <string name="rentaCar">Rent a car</string>
     <string name="title_activity_offline_main">OfflineMainActivity</string>
     <string name="goOnline">Go Online</string>
-    <string name="taxiSentence">Zəhmət olmasa mənə taksi göndərin Hörmətlə: </string>
-    <string name="washSentence">Zəhmət olmasa maşın yuma xidməti ilə əlaqələndirim Hörmətlə: </string>
-    <string name="rentSentence">Zəhmət olmasa mənim üçün maşın kiralayın Hörmətlə: </string>
-    <string name="driverSentence">Zəhmət olmasa mənə ayıq sürücü göndərin Hörmətlə: </string>
+    <string name="taxiSentence">Please call me a taxi. Username: </string>
+    <string name="washSentence">Please call car wash service. Username: </string>
+    <string name="rentSentence">Please rent a car for me Username: </string>
+    <string name="driverSentence">Please send a driver for me Username: </string>
     <string name="title_activity_wait_for_call">WaitForCall</string>
-    <string name="callRecievedText">You've Recieved a call!</string>
+    <string name="callRecievedText">You are Received a call!</string>
     <string name="waitingForCall">You are currently waiting for a call</string>
+    <string name="emergencyCallBtn">Emergency Call</string>
 </resources>

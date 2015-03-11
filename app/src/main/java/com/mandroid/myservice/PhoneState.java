@@ -23,9 +23,6 @@ public class PhoneState extends BroadcastReceiver{
             case TelephonyManager.CALL_STATE_RINGING:
                 WaitForCall call = new WaitForCall();
                 String phoneNr= intent.getStringExtra("incoming_number");
-                Toast.makeText(context, phoneNr, Toast.LENGTH_LONG).show();
-                //call.NavigateBack();
-               // call.navigation = true;
                 SharedPreferences.Editor editor = context.getSharedPreferences(IS_CALLED_SERVICE, context.MODE_PRIVATE).edit();
                 editor.putBoolean("iscalled", false);
                 editor.commit();
