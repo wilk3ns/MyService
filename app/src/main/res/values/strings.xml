@@ -12,12 +12,13 @@
     <string name="rentaCar">Rent a car</string>
     <string name="title_activity_offline_main">OfflineMainActivity</string>
     <string name="goOnline">Go Online</string>
-    <string name="taxiSentence">Please call me a taxi. Username: </string>
-    <string name="washSentence">Please call car wash service. Username: </string>
-    <string name="rentSentence">Please rent a car for me Username: </string>
-    <string name="driverSentence">Please send a driver for me Username: </string>
+    <string name="taxiSentence">Taksi chagirishi. Istifadeci: </string>
+    <string name="washSentence">Mashin yuma. Istifadeci: </string>
+    <string name="rentSentence">Kiraye mashin. Istifadeci: </string>
+    <string name="driverSentence">Ayiq surucu. Istifadeci: </string>
     <string name="title_activity_wait_for_call">WaitForCall</string>
     <string name="callRecievedText">You are Received a call!</string>
     <string name="waitingForCall">You are currently waiting for a call</string>
     <string name="emergencyCallBtn">Emergency Call</string>
+    <string name="serviceNumber">+994705801188</string>
 </resources>

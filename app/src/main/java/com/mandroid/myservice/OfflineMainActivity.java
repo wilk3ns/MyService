@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.telephony.SmsManager;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,17 +21,22 @@ public class OfflineMainActivity extends ActionBarActivity {
 
 
     String userName;
-
+    Toolbar toolbar;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_offline_main);
+        toolbar = (Toolbar) findViewById(R.id.app_bar);
+        toolbar.setLogo(R.drawable.ic_launcher);
+        toolbar.setTitle("*5533");
         ParseUser currentUser = ParseUser.getCurrentUser();
         TextView textView = (TextView)findViewById(R.id.textView);
         textView.setText(currentUser.getUsername().toString()+" (Offline)");
         userName = currentUser.getUsername().toString();
+        setSupportActionBar(toolbar);
     }
 
     public void OfflineCallDriverClicked(View view){
@@ -41,7 +47,7 @@ public class OfflineMainActivity extends ActionBarActivity {
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                sendSMS("+994555801188", getResources().getString(R.string.driverSentence) + userName.toString());
+                sendSMS(getResources().getString(R.string.serviceNumber), getResources().getString(R.string.driverSentence) + userName.toString());
                 dialog.dismiss();
                 SharedPreferences.Editor editor = getSharedPreferences("Service", MODE_PRIVATE).edit();
                 editor.putBoolean("iscalled", true);
@@ -66,7 +72,7 @@ public class OfflineMainActivity extends ActionBarActivity {
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                sendSMS("+994555801188", getResources().getString(R.string.taxiSentence) + userName.toString());
+                sendSMS(getResources().getString(R.string.serviceNumber), getResources().getString(R.string.taxiSentence) + userName.toString());
                 dialog.dismiss();
                 SharedPreferences.Editor editor = getSharedPreferences("Service", MODE_PRIVATE).edit();
                 editor.putBoolean("iscalled", true);
@@ -91,7 +97,7 @@ public class OfflineMainActivity extends ActionBarActivity {
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                sendSMS("+994555801188", getResources().getString(R.string.washSentence) + userName.toString());
+                sendSMS(getResources().getString(R.string.serviceNumber), getResources().getString(R.string.washSentence) + userName.toString());
                 dialog.dismiss();
                 SharedPreferences.Editor editor = getSharedPreferences("Service", MODE_PRIVATE).edit();
                 editor.putBoolean("iscalled", true);
@@ -116,7 +122,7 @@ public class OfflineMainActivity extends ActionBarActivity {
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                sendSMS("+994555801188", getResources().getString(R.string.rentSentence) + userName.toString());
+                sendSMS(getResources().getString(R.string.serviceNumber), getResources().getString(R.string.rentSentence) + userName.toString());
                 dialog.dismiss();
                 SharedPreferences.Editor editor = getSharedPreferences("Service", MODE_PRIVATE).edit();
                 editor.putBoolean("iscalled", true);

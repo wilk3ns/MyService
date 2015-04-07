@@ -55,7 +55,7 @@ public class WaitForCall extends Activity {
         Log.i("Make call", "");
 
         Intent phoneIntent = new Intent(Intent.ACTION_CALL);
-        phoneIntent.setData(Uri.parse("tel:+994558241819"));
+        phoneIntent.setData(Uri.parse("tel:"+getResources().getString(R.string.serviceNumber)));
 
         try {
             startActivity(phoneIntent);

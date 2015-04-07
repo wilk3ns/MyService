@@ -37,7 +37,7 @@ public class StartupCheckerActivity extends Activity {
             // if connected with internet
 
             //Toast.makeText(this, " Connected ", Toast.LENGTH_LONG).show();
-            ifConnected();
+            ifNotConnected();
             return true;
 
         } else if (
