@@ -6,57 +6,67 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.mandroid.myservice.RegisterActivity">
+    tools:context="com.mandroid.myservice.RegisterActivity"
+    android:background="@drawable/registerscene">
 
     <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
         android:inputType="textPersonName"
         android:ems="10"
         android:id="@+id/usrnameTxt"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="60dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:hint="username" />
+        android:layout_marginTop="87dp"
+        android:hint="İstifadəçi Adı"
+        android:textSize="15sp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true" />
+
+
 
     <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:ems="10"
-        android:id="@+id/emailTxt"
-        android:layout_marginTop="24dp"
-        android:hint="email"
-        android:layout_below="@+id/usrnameTxt"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
         android:inputType="textPassword"
         android:ems="10"
         android:id="@+id/passTxt"
-        android:hint="password"
-        android:layout_below="@+id/emailTxt"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="23dp" />
+        android:hint="Şifrə"
+        android:layout_below="@+id/userNameTxt"
+        android:layout_marginTop="143dp"
+        android:layout_centerHorizontal="true"
+        android:textSize="15sp" />
+
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/rePassTxt"
+        android:hint="Təkrar şifrə"
+        android:layout_below="@+id/passTxt"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:textSize="15sp" />
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:inputType="phone"
+        android:ems="10"
+        android:id="@+id/numberTxt"
+        android:hint="Mobil nömrə"
+        android:layout_below="@+id/rePassTxt"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:textSize="15sp" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sign Up"
+        android:layout_width="170dp"
+        android:layout_height="30dp"
         android:id="@+id/signUp"
-        android:layout_marginTop="37dp"
-        android:layout_below="@+id/passTxt"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:elevation="5dp"
+        android:background="@drawable/signupbutton"
+        android:layout_below="@+id/numberTxt"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp" />
+
 
 </RelativeLayout>

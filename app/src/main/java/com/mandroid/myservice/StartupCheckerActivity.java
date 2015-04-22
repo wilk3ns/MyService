@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.os.Handler;
 
 
 import com.parse.ParseAnonymousUtils;
@@ -16,8 +17,16 @@ public class StartupCheckerActivity extends Activity {
     SharedPreferences prefs;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_splash_screen);
         prefs = getSharedPreferences("Service", MODE_PRIVATE);
-        isInternetOn();
+
+        new Handler().postDelayed(new Runnable(){
+            @Override
+            public void run() {
+                /* Create an Intent that will start the Menu-Activity. */
+                isInternetOn();
+            }
+        }, 1000);
 
         // Determine whether the current user is an anonymous user
 
@@ -37,13 +46,11 @@ public class StartupCheckerActivity extends Activity {
             // if connected with internet
 
             //Toast.makeText(this, " Connected ", Toast.LENGTH_LONG).show();
-            ifNotConnected();
+            ifConnected();
             return true;
-
         } else if (
                 connec.getNetworkInfo(0).getState() == android.net.NetworkInfo.State.DISCONNECTED ||
                         connec.getNetworkInfo(1).getState() == android.net.NetworkInfo.State.DISCONNECTED  ) {
-
            //Toast.makeText(this, " Not Connected ", Toast.LENGTH_LONG).show();
             ifNotConnected();
             return false;
@@ -53,11 +60,7 @@ public class StartupCheckerActivity extends Activity {
 
     public void ifConnected(){
 
-        if (prefs.getBoolean("iscalled",false)==true){
-            startActivity(new Intent(this,WaitForCall.class));
-            finish();
-            return;
-        }
+
 
         if (ParseAnonymousUtils.isLinked(ParseUser.getCurrentUser())) {
             // If user is anonymous, send the user to LoginSignupActivity.class
@@ -84,15 +87,11 @@ public class StartupCheckerActivity extends Activity {
 
     }
     public void ifNotConnected(){
-        if (prefs.getBoolean("iscalled",false)==true){
-            startActivity(new Intent(this,WaitForCall.class));
-            finish();
-            return;
-        }
+
         if (ParseAnonymousUtils.isLinked(ParseUser.getCurrentUser())) {
             // If user is anonymous, send the user to LoginSignupActivity.class
             Intent intent = new Intent(StartupCheckerActivity.this,
-                    LoginActivity.class);
+                    OfflineMainActivity.class);
             startActivity(intent);
         } else {
             // If current user is NOT anonymous user
@@ -105,7 +104,7 @@ public class StartupCheckerActivity extends Activity {
             } else {
                 // Send user to LoginSignupActivity.class
                 Intent intent = new Intent(StartupCheckerActivity.this,
-                        LoginActivity.class);
+                        OfflineMainActivity.class);
                 startActivity(intent);
             }
         }

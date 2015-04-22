@@ -4,61 +4,104 @@
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.mandroid.myservice.LoginActivity"
-    android:id="@+id/relativeLayoutMain">
+    android:id="@+id/relativeLayoutMain"
+    android:background="@color/backgroundMaster">
 
     <include
         android:id="@+id/app_bar"
         layout="@layout/app_bar"/>
-    <Button
-
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:text="@string/DriverCall"
-        android:id="@+id/callDriverBtn"
-        android:onClick="CallDriverClicked"
-        android:layout_below="@+id/userNameTxt"
-        android:layout_alignLeft="@+id/callTaxiBtn"
-        android:layout_alignStart="@+id/callTaxiBtn"
-        android:layout_marginTop="39dp" />
-
-    <Button
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:text="@string/callTaxi"
-        android:id="@+id/callTaxiBtn"
-        android:layout_marginTop="51dp"
-        android:onClick="CallTaxiClicked"
-        android:layout_below="@+id/callDriverBtn"
-        android:layout_centerHorizontal="true" />
-
-    <Button
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:text="@string/carWash"
-        android:id="@+id/carWashBtn"
-        android:layout_below="@+id/callTaxiBtn"
-        android:layout_alignLeft="@+id/callTaxiBtn"
-        android:layout_alignStart="@+id/callTaxiBtn"
-        android:layout_marginTop="49dp"
-        android:onClick="CallCarWashClicked" />
-
-    <Button
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:text="@string/rentaCar"
-        android:id="@+id/RentBtn"
-        android:layout_marginTop="47dp"
-        android:layout_below="@+id/carWashBtn"
-        android:layout_centerHorizontal="true"
-        android:onClick="CallCarRentClicked" />
-
     <TextView
         android:layout_below="@+id/app_bar"
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text=""
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/callDriverBtn"
+        android:layout_width="170dp"
+        android:background="@drawable/callbutton"
+        android:layout_height="170dp"
+        android:onClick="CallDriverClicked"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="61dp" />
+
+    <Button
+        android:id="@+id/callTaxiBtn"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:onClick="CallTaxiClicked"
+        android:background="@drawable/calltaxibutton"
+        android:layout_above="@+id/emergencyCall"
+        android:layout_toLeftOf="@+id/callDriverBtn"
+        android:layout_toStartOf="@+id/callDriverBtn"
+        android:layout_marginBottom="115dp" />
+
+    <Button
+        android:id="@+id/carWashBtn"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:onClick="CallCarWashClicked"
+        android:background="@drawable/carwashbutton"
+        android:layout_alignTop="@+id/callTaxiBtn"
+        android:layout_toRightOf="@+id/callDriverBtn"
+        android:layout_toEndOf="@+id/callDriverBtn" />
+
+    <Button
+        android:id="@+id/RentBtn"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:onClick="CallCarRentClicked"
+        android:background="@drawable/rentacar"
+        android:layout_alignTop="@+id/button"
+        android:layout_alignLeft="@+id/emergencyCall"
+        android:layout_alignStart="@+id/emergencyCall" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:id="@+id/imageView"
+        android:src="@drawable/logo"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@+id/RentBtn"
+        android:paddingLeft="10dp"
+        android:layout_toLeftOf="@+id/RentBtn"
+        android:layout_alignParentTop="true"
+        android:layout_alignBottom="@+id/app_bar" />
+
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:id="@+id/emergencyCall"
+        android:background="@drawable/emergencycall"
+        android:onClick="makeOnlineCall"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="38dp" />
+
+    <Button
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:id="@+id/button"
+        android:background="@drawable/evacuatebuton"
+        android:layout_below="@+id/carWashBtn"
+        android:layout_alignRight="@+id/emergencyCall"
+        android:layout_alignEnd="@+id/emergencyCall"
+        android:nestedScrollingEnabled="false"
+        android:onClick="CallEvacuationClicked" />
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Large Text"
         android:id="@+id/userNameTxt"
-        android:layout_centerHorizontal="true" />
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/buttonAccent" />
 
 </RelativeLayout>

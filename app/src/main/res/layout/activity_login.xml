@@ -1,38 +1,71 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:id="@+id/loginRelative"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:orientation="vertical"
-    tools:context="com.mandroid.myservice.LoginActivity">
+    tools:context="com.mandroid.myservice.LoginActivity"
+    android:background="@drawable/loginscene">
 
     <EditText
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:hint="username"
-        android:id="@+id/usrLoginTxt"/>
+        android:hint="Şifrə"
+        android:id="@+id/passLoginTxt"
+        android:layout_alignTop="@+id/usrLoginTxt"
+        android:layout_marginTop="50dp"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:layout_centerHorizontal="true" />
+
     <EditText
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:hint="password"
-        android:id="@+id/passLoginTxt"/>
+        android:hint="İstifadəçi adı"
+        android:id="@+id/usrLoginTxt"
+        android:layout_marginTop="200dp"
+        android:layout_centerHorizontal="true" />
+
     <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Login"
-        android:id="@+id/loginBtn"/>
+        android:layout_width="170dp"
+        android:layout_height="30dp"
+        android:id="@+id/loginBtn"
+        android:background="@drawable/loginbutton"
+        android:layout_below="@+id/passLoginTxt"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp" />
+
+    <Button
+        android:layout_width="170dp"
+        android:layout_height="30dp"
+        android:id="@+id/regActivityBtn"
+        android:nestedScrollingEnabled="false"
+        android:onClick="OpenRegActivity"
+        android:background="@drawable/signupbutton"
+        android:layout_below="@+id/loginBtn"
+        android:layout_marginTop="5dp"
+        android:layout_alignLeft="@+id/loginBtn"
+        android:layout_alignStart="@+id/loginBtn" />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="or"
-        android:gravity="center_horizontal"/>
+        android:text="vəya"
+        android:gravity="center_horizontal"
+        android:id="@+id/textView3"
+        android:layout_below="@+id/regActivityBtn"
+        />
     <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Sign Up"
-        android:id="@+id/regActivityBtn"
-        android:nestedScrollingEnabled="false"
-        android:onClick="OpenRegActivity" />
+        android:layout_width="170dp"
+        android:layout_height="30dp"
+        android:id="@+id/guestBtn"
+        android:layout_below="@id/textView3"
+        android:layout_alignLeft="@id/loginBtn"
+        android:layout_alignStart="@id/loginBtn"
+        android:background="@drawable/qydyytz" />
 
-</LinearLayout>
+
+
+
+</RelativeLayout>

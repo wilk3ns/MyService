@@ -5,14 +5,17 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.telephony.SmsManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.parse.ParseUser;
 
@@ -24,121 +27,282 @@ public class OfflineMainActivity extends ActionBarActivity {
     Toolbar toolbar;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_offline_main);
         toolbar = (Toolbar) findViewById(R.id.app_bar);
-        toolbar.setLogo(R.drawable.ic_launcher);
-        toolbar.setTitle("*5533");
+        toolbar.setTitle("");
         ParseUser currentUser = ParseUser.getCurrentUser();
         TextView textView = (TextView)findViewById(R.id.textView);
-        textView.setText(currentUser.getUsername().toString()+" (Offline)");
-        userName = currentUser.getUsername().toString();
+        if(getIntent().getStringExtra("username")== null){
+            textView.setText(currentUser.getUsername().toString()+" (Offline)");
+            userName = currentUser.getUsername().toString();
+        }
+        else{
+            userName = getIntent().getStringExtra("username");
+            textView.setText(userName);
+        }
         setSupportActionBar(toolbar);
     }
 
-    public void OfflineCallDriverClicked(View view){
 
+
+    @Override
+    public void onBackPressed() {
         AlertDialog.Builder builder = new AlertDialog.Builder(OfflineMainActivity.this);
-        builder.setMessage("In offline mode orders will charge you by SMS cost");
-        builder.setTitle("Confirm");
-        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+        builder.setMessage("Proqramdan çıxmağa əminsinizmi?");
+        builder.setTitle("Təstiq");
+        builder.setPositiveButton("Bəli", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                sendSMS(getResources().getString(R.string.serviceNumber), getResources().getString(R.string.driverSentence) + userName.toString());
-                dialog.dismiss();
-                SharedPreferences.Editor editor = getSharedPreferences("Service", MODE_PRIVATE).edit();
-                editor.putBoolean("iscalled", true);
-                editor.commit();
-                startActivity(new Intent(OfflineMainActivity.this,WaitForCall.class));
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("EXIT", true);
+                startActivity(intent);
+                finish();
             }
         });
-        builder.setNegativeButton("Cancel",new DialogInterface.OnClickListener(){
+        builder.setNegativeButton("Xeyir", new DialogInterface.OnClickListener(){
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onClick(DialogInterface dialog, int which ) {
                 dialog.dismiss();
             }
         });
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    public void makeCall(View view) {
+        Log.i("Make call", "");
+
+        Intent phoneIntent = new Intent(Intent.ACTION_CALL);
+        phoneIntent.setData(Uri.parse("tel:" + getResources().getString(R.string.emergencyNumber)));
+
+        try {
+            startActivity(phoneIntent);
+            finish();
+            Log.i("Finished making a call...", "");
+        } catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(OfflineMainActivity.this,
+                    "Zəng alınmadı, lütfən daha sonra yoxlayın.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void OfflineCallDriverClicked(View view){
+        SharedPreferences prefs = getSharedPreferences("Service", MODE_PRIVATE);
+        boolean isCalled = prefs.getBoolean("iscalled",false);
+
+        if (isCalled == true) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(OfflineMainActivity.this);
+            builder.setMessage("Hal hazırda zəng gözləyirsiniz");
+            builder.setTitle("Gözləyin");
+            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        }
+        else {
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(OfflineMainActivity.this);
+            builder.setMessage("Offline vəya Qonaq rejimdə balansınızdan SMS tarifinə uyğun olaraq ödəniş həyata keçiriləcək");
+            builder.setTitle("Təstiqləyin");
+            builder.setPositiveButton("Bəli", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    sendSMS(getResources().getString(R.string.serviceNumber), getResources().getString(R.string.driverSentence) + userName.toString());
+                    dialog.dismiss();
+                    SharedPreferences.Editor editor = getSharedPreferences("Service", MODE_PRIVATE).edit();
+                    editor.putBoolean("iscalled", true);
+                    editor.commit();
+                    //startActivity(new Intent(OfflineMainActivity.this, WaitForCall.class));
+                }
+            });
+            builder.setNegativeButton("Xeyir", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        }
     }
 
     public void OfflineCallTaxiClicked(View view){
-        AlertDialog.Builder builder = new AlertDialog.Builder(OfflineMainActivity.this);
-        builder.setMessage("In offline mode orders will charge you by SMS cost");
-        builder.setTitle("Confirm");
-        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                sendSMS(getResources().getString(R.string.serviceNumber), getResources().getString(R.string.taxiSentence) + userName.toString());
-                dialog.dismiss();
-                SharedPreferences.Editor editor = getSharedPreferences("Service", MODE_PRIVATE).edit();
-                editor.putBoolean("iscalled", true);
-                editor.commit();
-                startActivity(new Intent(OfflineMainActivity.this,WaitForCall.class));
-            }
-        });
-        builder.setNegativeButton("Cancel",new DialogInterface.OnClickListener(){
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-        AlertDialog dialog = builder.create();
-        dialog.show();
+        SharedPreferences prefs = getSharedPreferences("Service", MODE_PRIVATE);
+        boolean isCalled = prefs.getBoolean("iscalled",false);
+        if (isCalled == true) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(OfflineMainActivity.this);
+            builder.setMessage("Hal hazırda zəng gözləyirsiniz");
+            builder.setTitle("Gözləyin");
+            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        }
+        else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(OfflineMainActivity.this);
+            builder.setMessage("Offline vəya Qonaq rejimdə balansınızdan SMS tarifinə uyğun olaraq ödəniş həyata keçiriləcək");
+            builder.setTitle("Təstiqləyin");
+            builder.setPositiveButton("Bəli", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    sendSMS(getResources().getString(R.string.serviceNumber), getResources().getString(R.string.taxiSentence) + userName.toString());
+                    dialog.dismiss();
+                    SharedPreferences.Editor editor = getSharedPreferences("Service", MODE_PRIVATE).edit();
+                    editor.putBoolean("iscalled", true);
+                    editor.commit();
+                    //startActivity(new Intent(OfflineMainActivity.this, WaitForCall.class));
+                }
+            });
+            builder.setNegativeButton("Xeyir", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        }
     }
 
     public void OfflineCarWashClicked(View view){
-        AlertDialog.Builder builder = new AlertDialog.Builder(OfflineMainActivity.this);
-        builder.setMessage("In offline mode orders will charge you by SMS cost");
-        builder.setTitle("Confirm");
-        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                sendSMS(getResources().getString(R.string.serviceNumber), getResources().getString(R.string.washSentence) + userName.toString());
-                dialog.dismiss();
-                SharedPreferences.Editor editor = getSharedPreferences("Service", MODE_PRIVATE).edit();
-                editor.putBoolean("iscalled", true);
-                editor.commit();
-                startActivity(new Intent(OfflineMainActivity.this,WaitForCall.class));
-            }
-        });
-        builder.setNegativeButton("Cancel",new DialogInterface.OnClickListener(){
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-        AlertDialog dialog = builder.create();
-        dialog.show();
+        SharedPreferences prefs = getSharedPreferences("Service", MODE_PRIVATE);
+        boolean isCalled = prefs.getBoolean("iscalled",false);
+        if (isCalled == true) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(OfflineMainActivity.this);
+            builder.setMessage("Hal hazırda zəng gözləyirsiniz");
+            builder.setTitle("Gözləyin");
+            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        }
+        else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(OfflineMainActivity.this);
+            builder.setMessage("Offline vəya Qonaq rejimdə balansınızdan SMS tarifinə uyğun olaraq ödəniş həyata keçiriləcək");
+            builder.setTitle("Təstiqləyin");
+            builder.setPositiveButton("Bəli", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    sendSMS(getResources().getString(R.string.serviceNumber), getResources().getString(R.string.washSentence) + userName.toString());
+                    dialog.dismiss();
+                    SharedPreferences.Editor editor = getSharedPreferences("Service", MODE_PRIVATE).edit();
+                    editor.putBoolean("iscalled", true);
+                    editor.commit();
+                    //startActivity(new Intent(OfflineMainActivity.this, WaitForCall.class));
+                }
+            });
+            builder.setNegativeButton("Xeyir", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        }
     }
 
     public void OfflineCarRent(View view){
-        AlertDialog.Builder builder = new AlertDialog.Builder(OfflineMainActivity.this);
-        builder.setMessage("In offline mode orders will charge you by SMS cost");
-        builder.setTitle("Confirm");
-        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                sendSMS(getResources().getString(R.string.serviceNumber), getResources().getString(R.string.rentSentence) + userName.toString());
-                dialog.dismiss();
-                SharedPreferences.Editor editor = getSharedPreferences("Service", MODE_PRIVATE).edit();
-                editor.putBoolean("iscalled", true);
-                editor.commit();
-                startActivity(new Intent(OfflineMainActivity.this,WaitForCall.class));
-            }
-        });
-        builder.setNegativeButton("Cancel",new DialogInterface.OnClickListener(){
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-        AlertDialog dialog = builder.create();
-        dialog.show();
+        SharedPreferences prefs = getSharedPreferences("Service", MODE_PRIVATE);
+        boolean isCalled = prefs.getBoolean("iscalled",false);
+        if (isCalled == true) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(OfflineMainActivity.this);
+            builder.setMessage("Hal hazırda zəng gözləyirsiniz");
+            builder.setTitle("Gözləyin");
+            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        }
+        else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(OfflineMainActivity.this);
+            builder.setMessage("Offline vəya Qonaq rejimdə balansınızdan SMS tarifinə uyğun olaraq ödəniş həyata keçiriləcək");
+            builder.setTitle("Təstiqləyin");
+            builder.setPositiveButton("Bəli", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    sendSMS(getResources().getString(R.string.serviceNumber), getResources().getString(R.string.rentSentence) + userName.toString());
+                    dialog.dismiss();
+                    SharedPreferences.Editor editor = getSharedPreferences("Service", MODE_PRIVATE).edit();
+                    editor.putBoolean("iscalled", true);
+                    editor.commit();
+                    //startActivity(new Intent(OfflineMainActivity.this, WaitForCall.class));
+                }
+            });
+            builder.setNegativeButton("Xeyir", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        }
     }
+
+    public void OfflineEvacuate(View view){
+        SharedPreferences prefs = getSharedPreferences("Service", MODE_PRIVATE);
+        boolean isCalled = prefs.getBoolean("iscalled",false);
+        if (isCalled == true) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(OfflineMainActivity.this);
+            builder.setMessage("Hal hazırda zəng gözləyirsiniz");
+            builder.setTitle("Gözləyin");
+            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        }
+        else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(OfflineMainActivity.this);
+            builder.setMessage("Offline vəya Qonaq rejimdə balansınızdan SMS tarifinə uyğun olaraq ödəniş həyata keçiriləcək");
+            builder.setTitle("Təstiqləyin");
+            builder.setPositiveButton("Bəli", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    sendSMS(getResources().getString(R.string.serviceNumber), getResources().getString(R.string.evacuateSentence) + userName.toString());
+                    dialog.dismiss();
+                    SharedPreferences.Editor editor = getSharedPreferences("Service", MODE_PRIVATE).edit();
+                    editor.putBoolean("iscalled", true);
+                    editor.commit();
+                    //startActivity(new Intent(OfflineMainActivity.this, WaitForCall.class));
+                }
+            });
+            builder.setNegativeButton("Xeyir", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        }
+    }
+
 
     private void sendSMS(String phoneNumber, String message)
     {
@@ -162,8 +326,8 @@ public class OfflineMainActivity extends ActionBarActivity {
         int id = item.getItemId();
 
         switch (id){
-            case R.id.action_settings:
-                return true;
+//            case R.id.action_settings:
+//                return true;
             case R.id.action_goOnline:
                 if (isInternetOn()){
                     Intent i = new Intent(OfflineMainActivity.this, MainActivity.class);
@@ -172,8 +336,8 @@ public class OfflineMainActivity extends ActionBarActivity {
                 }
                 else{
                         AlertDialog.Builder builder = new AlertDialog.Builder(OfflineMainActivity.this);
-                        builder.setMessage("No Internet connection");
-                        builder.setTitle("Error");
+                        builder.setMessage("İnternetlə əlaqə yoxdur");
+                        builder.setTitle("Səhv");
                         builder.setPositiveButton("Ok",new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -193,6 +357,7 @@ public class OfflineMainActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 
     public final boolean isInternetOn() {
 

@@ -58,6 +58,10 @@ public class WaitForCall extends Activity {
         phoneIntent.setData(Uri.parse("tel:"+getResources().getString(R.string.serviceNumber)));
 
         try {
+            startActivity(new Intent(WaitForCall.this,LoginActivity.class));
+            SharedPreferences.Editor editor = getSharedPreferences("Service", MODE_PRIVATE).edit();
+            editor.putBoolean("iscalled", false);
+            editor.commit();
             startActivity(phoneIntent);
             finish();
             Log.i("Finished making a call...", "");
