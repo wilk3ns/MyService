@@ -82,6 +82,9 @@ public class OfflineMainActivity extends ActionBarActivity {
         phoneIntent.setData(Uri.parse("tel:" + getResources().getString(R.string.emergencyNumber)));
 
         try {
+            SharedPreferences.Editor editor = getSharedPreferences("Service", MODE_PRIVATE).edit();
+            editor.putBoolean("iscalled", false);
+            editor.commit();
             startActivity(phoneIntent);
             finish();
             Log.i("Finished making a call...", "");
@@ -330,8 +333,13 @@ public class OfflineMainActivity extends ActionBarActivity {
 //                return true;
             case R.id.action_goOnline:
                 if (isInternetOn()){
-                    Intent i = new Intent(OfflineMainActivity.this, MainActivity.class);
-                    startActivity(i);
+                    if(getIntent().getStringExtra("username")== null){
+                        Intent i = new Intent(OfflineMainActivity.this, MainActivity.class);
+                        startActivity(i);
+                    }
+                    else{
+                        startActivity(new Intent(OfflineMainActivity.this, LoginActivity.class));
+                    }
                     finish();
                 }
                 else{

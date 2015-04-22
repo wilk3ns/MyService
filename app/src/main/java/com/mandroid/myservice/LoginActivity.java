@@ -85,6 +85,7 @@ public class LoginActivity extends ActionBarActivity {
                 Intent i = new Intent(LoginActivity.this, OfflineMainActivity.class);
                 i.putExtra("username","Qonaq");
                 startActivity(i);
+                finish();
             }
         });
     }

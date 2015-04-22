@@ -87,6 +87,9 @@ public class MainActivity extends ActionBarActivity {
         phoneIntent.setData(Uri.parse("tel:" + getResources().getString(R.string.emergencyNumber)));
 
         try {
+            SharedPreferences.Editor editor = getSharedPreferences("Service", MODE_PRIVATE).edit();
+            editor.putBoolean("iscalled", false);
+            editor.commit();
             startActivity(phoneIntent);
             Log.i("Finished making a call...", "");
         } catch (android.content.ActivityNotFoundException ex) {
