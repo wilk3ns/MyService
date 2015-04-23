@@ -9,6 +9,12 @@
     tools:context="com.mandroid.myservice.LoginActivity"
     android:background="@drawable/loginscene">
 
+    <ImageView
+        android:layout_width="130dp"
+        android:layout_height="160dp"
+        android:id="@+id/imageView4"
+        android:layout_centerHorizontal="true" />
+
     <EditText
         android:layout_width="300dp"
         android:layout_height="wrap_content"
@@ -25,7 +31,8 @@
         android:layout_height="wrap_content"
         android:hint="İstifadəçi adı"
         android:id="@+id/usrLoginTxt"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="@dimen/login_components_from_top_margin"
+        android:layout_below="@id/imageView4"
         android:layout_centerHorizontal="true" />
 
     <Button

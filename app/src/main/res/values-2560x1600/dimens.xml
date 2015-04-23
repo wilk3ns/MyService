@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="login_components_from_top_margin">400dp</dimen>
+</resources>

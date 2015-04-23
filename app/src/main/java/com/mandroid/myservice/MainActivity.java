@@ -2,9 +2,8 @@ package com.mandroid.myservice;
 
 
 import android.app.AlertDialog;
-import android.app.Application;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
@@ -18,7 +17,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
