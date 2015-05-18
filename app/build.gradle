@@ -8,8 +8,8 @@ android {
         applicationId "com.mandroid.myservice"
         minSdkVersion 14
         targetSdkVersion 21
-        versionCode 4
-        versionName "1.2"
+        versionCode 7
+        versionName "1.4"
     }
     buildTypes {
         release {
@@ -22,6 +22,7 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:22.0.0'
+    compile 'com.wrapp.floatlabelededittext:library:0.0.6'
     compile files('libs/Parse-1.8.3.jar')
 
 }

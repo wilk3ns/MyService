@@ -170,6 +170,11 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
+    public void LoadCarList(View view)
+    {
+        startActivity(new Intent(MainActivity.this,CarListView.class));
+    }
+
 
 
     public void CallTaxiClicked(View view){

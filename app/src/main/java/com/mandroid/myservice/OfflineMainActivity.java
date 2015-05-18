@@ -65,9 +65,9 @@ public class OfflineMainActivity extends ActionBarActivity {
                 finish();
             }
         });
-        builder.setNegativeButton("Xeyir", new DialogInterface.OnClickListener(){
+        builder.setNegativeButton("Xeyir", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which ) {
+            public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
             }
         });
@@ -178,6 +178,11 @@ public class OfflineMainActivity extends ActionBarActivity {
             AlertDialog dialog = builder.create();
             dialog.show();
         }
+    }
+
+    public void OfflineLoadCarList(View view)
+    {
+        startActivity(new Intent(OfflineMainActivity.this,CarListView.class));
     }
 
     public void OfflineCarWashClicked(View view){

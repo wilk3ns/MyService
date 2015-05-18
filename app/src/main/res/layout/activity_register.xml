@@ -9,6 +9,15 @@
     tools:context="com.mandroid.myservice.RegisterActivity"
     android:background="@drawable/registerscene">
 
+    <com.wrapp.floatlabelededittext.FloatLabeledEditText
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="87dp"
+        android:id="@+id/usernameTxtLayout"
+        android:layout_alignParentTop="true"
+        >
+
     <EditText
         android:layout_width="300dp"
         android:layout_height="40dp"
@@ -20,8 +29,15 @@
         android:textSize="15sp"
         android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true" />
+    </com.wrapp.floatlabelededittext.FloatLabeledEditText>
 
-
+    <com.wrapp.floatlabelededittext.FloatLabeledEditText
+        android:layout_width="300dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/usernameTxtLayout"
+        android:id="@+id/passTxtLayout"
+        android:layout_height="wrap_content"
+        >
 
     <EditText
         android:layout_width="300dp"
@@ -34,6 +50,15 @@
         android:layout_marginTop="143dp"
         android:layout_centerHorizontal="true"
         android:textSize="15sp" />
+    </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+
+    <com.wrapp.floatlabelededittext.FloatLabeledEditText
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/passTxtLayout"
+        android:id="@+id/rePassTxtLayout"
+        >
 
     <EditText
         android:layout_width="300dp"
@@ -44,19 +69,29 @@
         android:hint="Təkrar şifrə"
         android:layout_below="@+id/passTxt"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
         android:textSize="15sp" />
+    </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+
+    <com.wrapp.floatlabelededittext.FloatLabeledEditText
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/rePassTxtLayout"
+        android:id="@+id/numberTxtLayout"
+        >
     <EditText
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:inputType="phone"
+        android:digits="0123456789+"
         android:ems="10"
         android:id="@+id/numberTxt"
         android:hint="Mobil nömrə"
         android:layout_below="@+id/rePassTxt"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
+
         android:textSize="15sp" />
+    </com.wrapp.floatlabelededittext.FloatLabeledEditText>
 
     <Button
         android:layout_width="170dp"
@@ -64,7 +99,7 @@
         android:id="@+id/signUp"
         android:elevation="5dp"
         android:background="@drawable/signupbutton"
-        android:layout_below="@+id/numberTxt"
+        android:layout_below="@+id/numberTxtLayout"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp" />
 

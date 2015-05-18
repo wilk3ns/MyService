@@ -26,4 +26,5 @@
     <string name="evacuateSentence">Evakuator xidmeti. Istifadeci: </string>
 
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_car_list_view">CarListView</string>
 </resources>

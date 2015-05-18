@@ -5,4 +5,5 @@
     <color name="accentColor">#705037</color>
     <color name="backgroundMaster">#efefef</color>
     <color name="buttonAccent">#d2bd22</color>
+    <color name="white">#ffffff</color>
 </resources>
